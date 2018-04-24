@@ -77,7 +77,7 @@ Namespace WindowsApplication1
             End If
         End Sub
 
-        Private Sub Form1_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
+        Private Sub Form1_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
             Dim res1 As Resource = schedulerStorage1.CreateResource(1, "John")
             Dim res2 As Resource = schedulerStorage1.CreateResource(2, "Jane")
             Dim res3 As Resource = schedulerStorage1.CreateResource(3, "Bob")

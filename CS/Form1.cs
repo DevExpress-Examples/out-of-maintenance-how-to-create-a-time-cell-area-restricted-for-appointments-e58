@@ -10,10 +10,17 @@ using DevExpress.XtraScheduler;
 
 namespace WindowsApplication1 {
     public partial class Form1 : Form {
+        SolidBrush msb = new SolidBrush(Color.FromArgb(90, 50, 50, 50));
         public Form1() {
             InitializeComponent();
             schedulerControl1.DayView.TopRowTime = new TimeSpan(10, 0, 0);
-        }      
+        }
+        private void Form1_Load(object sender, EventArgs e) {
+            Resource res1 = schedulerStorage1.CreateResource(1, "John");
+            Resource res2 = schedulerStorage1.CreateResource(2, "Jane");
+            Resource res3 = schedulerStorage1.CreateResource(3, "Bob");
+            this.schedulerStorage1.Resources.AddRange(new Resource[] { res1, res2, res3 });
+        }
         private void schedulerControl1_AllowAppointmentConflicts(object sender, DevExpress.XtraScheduler.AppointmentConflictEventArgs e) {
             TimeInterval interval = e.Interval;
             if (!IsIntervalAllowed(interval)) {
@@ -37,7 +44,6 @@ namespace WindowsApplication1 {
             return !interval.IntersectsWithExcludingBounds(lunchTime);
         }
 
-
         private void schedulerControl1_CustomDrawTimeCell(object sender, DevExpress.XtraScheduler.CustomDrawObjectEventArgs e) {
             if (e.ObjectInfo is TimeCell) {
                 TimeCell tc = e.ObjectInfo as TimeCell;
@@ -46,12 +52,7 @@ namespace WindowsApplication1 {
                 }
             }
         }
-
-        
-        //                
-        SolidBrush msb = new SolidBrush(Color.FromArgb(90, 50, 50, 50));
-        
-        private void schedulerControl1_Paint(object sender, PaintEventArgs e) {
+        private void schedulerControl1_PaintEx(object sender, SchedulerControlPaintEventArgs e) {
             Rectangle rect = Rectangle.Empty;
             if(schedulerControl1.ActiveView is DayView) {
                 foreach(DayViewColumn column in ((DayViewInfo)schedulerControl1.ActiveView.ViewInfo).Columns) {
@@ -66,17 +67,9 @@ namespace WindowsApplication1 {
                     }
                 }
                 if(rect != Rectangle.Empty)
-                    using(Font f = new Font("Arial", rect.Height-4, GraphicsUnit.Pixel))
-                        e.Graphics.DrawString("Lunch Time", f, msb, new PointF(rect.X + rect.Width / 2 - f.Size*3, rect.Y + rect.Height / 2 - f.Size / 2));
+                    using(Font f = new Font("Arial", rect.Height, GraphicsUnit.Pixel))
+                        e.Cache.DrawString("Lunch Time", f, msb, new PointF(rect.X + rect.Width / 2 - f.Size*3, rect.Y + rect.Height / 2 - f.Size / 2));
             }
-        }
-
-        private void Form1_Load(object sender, EventArgs e) {
-            Resource res1 = schedulerStorage1.CreateResource(1, "John");
-            Resource res2 = schedulerStorage1.CreateResource(2, "Jane");
-            Resource res3 = schedulerStorage1.CreateResource(3, "Bob");
-            this.schedulerStorage1.Resources.AddRange(new Resource[] { res1, res2, res3 });
-
         }
     }
 }

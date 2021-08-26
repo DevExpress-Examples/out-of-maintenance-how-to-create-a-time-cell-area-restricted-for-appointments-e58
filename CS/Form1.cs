@@ -7,7 +7,6 @@ using System.Text;
 using System.Windows.Forms;
 using DevExpress.XtraScheduler.Drawing;
 using DevExpress.XtraScheduler;
-using DXApplication1;
 using DevExpress.Utils.Svg;
 
 namespace WindowsApplication1 {

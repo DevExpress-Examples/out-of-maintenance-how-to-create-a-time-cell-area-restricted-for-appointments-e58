@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Drawing;
 
-namespace DXApplication1 {
+namespace WindowsApplication1 {
     public class InitHelper {
         public static Random RandomInstance = new Random();
 
@@ -18,7 +18,7 @@ namespace DXApplication1 {
             cr.Name = caption;
             return cr;
         }
-        
+
         public static void InitAppointments(BindingList<CustomAppointment> appointments, BindingList<CustomResource> resources) {
             GenerateEvents(appointments, resources);
         }
@@ -46,35 +46,6 @@ namespace DXApplication1 {
             apt.Label = label;
             apt.Description = (rnd.Next() % 3 == 0) ? "Sample description" : String.Empty;
             return apt;
-        }
-
-        public static void InitLabels(BindingList<CustomLabel> labels) {
-            for(int i=0;i<15;i++)
-            labels.Add(CreateCustomLabel(i));
-        }
-
-        private static CustomLabel CreateCustomLabel(int id) {
-            CustomLabel label = new CustomLabel();
-            label.ID = id;
-            label.Name = "Name" + id;
-            Random rnd = RandomInstance;
-            label.ColorLabel = Color.FromArgb(rnd.Next());
-            return label;
-        }
-
-        public static void InitStatus(BindingList<CustomStatus> listStatus) {
-            for(int i = 0; i < 15; i++)
-                listStatus.Add(CreateCustomStatus(i));
-        }
-
-        private static CustomStatus CreateCustomStatus(int id) {
-            CustomStatus status = new CustomStatus();
-            status.ID = id;
-            status.Name = "Status" + id;
-            Random rnd = RandomInstance;
-            // status.ColorStatus = new SolidBrush(Color.FromArgb(rnd.Next()));
-            status.ColorStatus = Color.FromArgb(rnd.Next());
-            return status;
         }
     }
 }

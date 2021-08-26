@@ -48,7 +48,6 @@ namespace WindowsApplication1 {
             this.schedulerControl1.Text = "schedulerControl1";
             this.schedulerControl1.Views.DayView.TimeRulers.Add(timeRuler1);
             this.schedulerControl1.Views.WorkWeekView.TimeRulers.Add(timeRuler2);
-            this.schedulerControl1.Views.YearView.UseOptimizedScrolling = false;
             // 
             // schedulerDataStorage1
             // 

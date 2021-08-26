@@ -66,7 +66,6 @@ namespace WindowsApplication1 {
             schedulerDataStorage1.Appointments.DataSource = CustomEventList;
 
             schedulerControl1.GroupType = SchedulerGroupType.Resource;
-            schedulerControl1.OptionsView.HighlightTodayDate = DevExpress.Utils.DefaultBoolean.False;
 
             CreateTimeRegion();
 

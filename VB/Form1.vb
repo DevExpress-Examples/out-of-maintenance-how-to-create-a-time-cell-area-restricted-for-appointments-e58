@@ -1,4 +1,4 @@
-Imports System
+﻿Imports System
 Imports System.Collections.Generic
 Imports System.ComponentModel
 Imports System.Data
@@ -7,7 +7,6 @@ Imports System.Text
 Imports System.Windows.Forms
 Imports DevExpress.XtraScheduler.Drawing
 Imports DevExpress.XtraScheduler
-Imports DXApplication1
 Imports DevExpress.Utils.Svg
 
 Namespace WindowsApplication1
@@ -25,19 +24,19 @@ Namespace WindowsApplication1
 		End Sub
 
 		Private Sub SchedulerControl1_TimeRegionCustomize(ByVal sender As Object, ByVal e As TimeRegionCustomizeEventArgs)
-			If e.Interval.Start = Date.Now.AddDays(5) Then
+			If e.Interval.Start = DateTime.Now.AddDays(5) Then
 				e.Editable = True
 			End If
 		End Sub
 
 		Private Sub SchedulerControl1_CustomDrawTimeRegion(ByVal sender As Object, ByVal e As CustomDrawTimeRegionEventArgs)
-			If e.TimeRegion IsNot schedulerControl1.TimeRegions(0) Then
+			If e.TimeRegion <> schedulerControl1.TimeRegions(0) Then
 				Return
 			End If
 			e.DrawDefault()
 'INSTANT VB NOTE: The variable bounds was renamed since Visual Basic does not handle local variables named the same as class members well:
-			Dim bounds_Renamed As New Rectangle(e.Bounds.X, e.Bounds.Y, e.Bounds.Width, e.Bounds.Height)
-			Dim scaleFactor As Double = bounds_Renamed.Height \ svgImageCollection1(0).Height
+			Dim bounds_Conflict As New Rectangle(e.Bounds.X, e.Bounds.Y, e.Bounds.Width, e.Bounds.Height)
+			Dim scaleFactor As Double = bounds_Conflict.Height \ svgImageCollection1(0).Height
 			Dim img As Image= svgImageCollection1(0).Render(Nothing, Math.Min(scaleFactor, 1))
 			Dim x As Integer = e.Bounds.Location.X + (e.Bounds.Width \ 2 - img.Width \ 2)
 			Dim y As Integer = e.Bounds.Location.Y + (e.Bounds.Height \ 2 - img.Height \ 2)
@@ -45,7 +44,7 @@ Namespace WindowsApplication1
 			e.Handled = True
 		End Sub
 
-		Private Sub Form1_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
+		Private Sub Form1_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
 			InitHelper.InitResources(CustomResourceCollection)
 			InitHelper.InitAppointments(CustomEventList, CustomResourceCollection)
 
@@ -71,15 +70,14 @@ Namespace WindowsApplication1
 			schedulerDataStorage1.Appointments.DataSource = CustomEventList
 
 			schedulerControl1.GroupType = SchedulerGroupType.Resource
-			schedulerControl1.OptionsView.HighlightTodayDate = DevExpress.Utils.DefaultBoolean.False
 
 			CreateTimeRegion()
 
-			schedulerControl1.Start = Date.Now
+			schedulerControl1.Start = DateTime.Now
 		End Sub
 
 		Private Sub CreateTimeRegion()
-			Dim baseDate As Date = Date.Today.AddDays(-CInt(Date.Today.DayOfWeek) + CInt(DayOfWeek.Monday))
+			Dim baseDate As DateTime = DateTime.Today.AddDays(-CInt(DateTime.Today.DayOfWeek) + CInt(DayOfWeek.Monday))
 			baseDate = baseDate.AddDays(-15)
 
 			Dim timeRegion1 As New TimeRegion()

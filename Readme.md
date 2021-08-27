@@ -11,5 +11,6 @@
 </p><p>To assign this area for the two resources only, you need to add their identifiers to the <a href="https://docs.devexpress.com/WindowsForms/DevExpress.XtraScheduler.TimeRegion.ResourceIds">TimeRegion.ResourceIds</a> property. </p>
 <p>Also, the <a href="https://docs.devexpress.com/WindowsForms/DevExpress.XtraScheduler.SchedulerControl.CustomDrawTimeRegion">SchedulerControl.CustomDrawTimeRegion</a> event is used to adjust the time region's appearance. If you need to override the region behavior, handle the <a href="https://docs.devexpress.com/WindowsForms/DevExpress.XtraScheduler.SchedulerControl.TimeRegionCustomize">SchedulerControl.TimeRegionCustomize</a> event.</p>
 
+
 <br/>
 
